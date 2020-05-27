@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.16" />
+    <PackageReference Include="NSwag.AspNetCore" Version="11.19.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AIS.MGT.Core\AIS.MGT.Core.csproj" />
+    <ProjectReference Include="..\AIS.MGT.Model\AIS.MGT.Model.csproj" />
+    <ProjectReference Include="..\AIS.MGT.QueryStack\AIS.MGT.QueryStack.csproj" />
+  </ItemGroup>
+
+</Project>
