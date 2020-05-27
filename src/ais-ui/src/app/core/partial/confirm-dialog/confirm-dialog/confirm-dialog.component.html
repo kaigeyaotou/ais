@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Confirm</h1>
+<div mat-dialog-content>
+    <label>{{data.msg}}</label>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-secondary" style="margin-left: 10%;" mat-button [mat-dialog-close]="false">No</button>
+    <button class="btn btn-primary" mat-button style="margin-left:30%" [mat-dialog-close]="true"
+        cdkFocusInitial>Yes</button>
+</div>

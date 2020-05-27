@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-2">State</div>
+    <div class="col-2">Lincense#</div>
+    <div class="col-2">Effective Date</div>
+    <div class="col-2">Expiration Date</div>
+    <div class="col-2">Edit</div>
+    <div class="col-2">Remove</div>
+</div>
+<div *ngFor="let state of states" class="row">
+    <div class="col-2">{{state.state_abbr}}</div>
+    <div class="col-2">{{state.license}}</div>
+    <div class="col-2">{{state.effective_date}}</div>
+    <div class="col-2">{{state.expiration_date}}</div>
+    <div class="col-2"><a (click)="editState(state)">Edit</a></div>
+    <div class="col-2"><a>Remove</a></div>
+</div>
+
+<button (click)="addState()">Add State</button>
+<button mat-button (click)="openDialog()">Open dialog</button>

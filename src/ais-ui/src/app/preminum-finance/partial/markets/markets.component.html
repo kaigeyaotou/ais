@@ -1,0 +1,43 @@
+<div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group row">
+        <label>Are All Contract Types Eligible</label> <input type="checkbox" [(ngModel)]="allContractType">
+      </div>
+      <div [hidden]="allContractType" id="div-contract-type">
+        <div class="row" id="chk_contract_type" *ngFor="let contract of contract_types">
+          <label><input type="checkbox" [id]="contract.id_contract_type" />{{contract.name}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group row">
+        <label>Are All Payment Terms to MP Eligible</label><input type="checkbox" [(ngModel)]="allPayment"> </div>
+      <div id="chk_payment" [hidden]="allPayment">
+        <div class="row">
+          <input type="checkbox" id="0" />Invoice Due Date to B/P more than <input type="text">
+        </div>
+        <div class="row">
+          <input type="checkbox" id="1" />Statement
+        </div>
+        <div class="row">
+          <input type="checkbox" id="2" />Direct Bill
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-6">
+      <label> Are ALL MP Contracts Eligile</label> <input type="checkbox" [(ngModel)]="allSubContract" />
+    </div>
+    <div class="col-6" [hidden]="allSubContract">
+      <label>States</label> <select></select>
+    </div>
+  </div>
+  <div class="row" [hidden]="allSubContract">
+    <div id="id_contracttree"></div>
+  </div>
+ 
+</div>

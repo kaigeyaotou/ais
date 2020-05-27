@@ -1,0 +1,2438 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MGT.AIS</name>
+    </assembly>
+    <members>
+        <member name="M:MGT.AIS.Controllers.AISController.NewBillingAccountSetup(MGT.AIS.Controllers.NewBillingAccountSetup.NewBillingAccountSetupCommand)">
+            <summary>
+            Used to setup a premium finance billing account for an insured on AIS system
+            </summary>
+            <param name="newBillingAccountSetupCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.AdditionalPremiumEndorsement(MGT.AIS.Controllers.AdditionalPremiumEndorsement.AdditionalPremiumEndorsementCommand)">
+            <summary>
+            Used to increase the premium amount for a premium finance billing account currently setup on AIS system, due to an endorsement on an existing policy or a new policy.
+            </summary>
+            <param name="additionalPremiumEndorsementCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.ReturnPremiumEndorsement(MGT.AIS.Controllers.ReturnPremiumEndorsement.ReturnPremiumEndorsementCommand)">
+            <summary>
+            Used to decrease the premium amount for a premium finance billing account currently setup on AIS system, due to an endorsement for a return premium or cancellation return premium.
+            </summary>
+            <param name="returnPremiumEndorsementCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.PolicyCancellation(MGT.AIS.Controllers.PolicyCancellation.PolicyCancellationCommand)">
+            <summary>
+            Used to cancel a policy for a premium finance billing account currently setup on AIS system for any other reason other than non-payment of premium.
+            </summary>
+            <param name="policyCancellationCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.PolicyReinstatement(MGT.AIS.Controllers.PolicyReinstatement.PolicyReinstatementCommand)">
+            <summary>
+            Used to reinstate a policy for a premium finance billing account currently setup on AIS system that was previously cancelled for any reason other than non-payment of premium
+            </summary>
+            <param name="policyReinstatementCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.BillingAccountInformation(MGT.AIS.Controllers.BillingAccountInformation.BillingAccountInformationCommand)">
+            <summary>
+            Used to retrieve insured's billing account information (with or without policy details) for a premium finance billing account currently setup on AIS system.
+            </summary>
+            <param name="billingAccountInformationCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.InsuredInformationChange(MGT.AIS.Controllers.InsuredInformationChange.InsuredInformationChangeCommand)">
+            <summary>
+            Used to change the insured’s address, phone, fax or email address for a premium finance billing account currently setup on AIS system.
+            </summary>
+            <param name="insuredInformationChangeCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.AgentInformationChange(MGT.AIS.Controllers.AgentInformationChange.AgentInformationChangeCommand)">
+            <summary>
+            Used to change an agent’s name and address, phone, fax or email address for a premium finance billing account currently setup on AIS system.
+            </summary>
+            <param name="agentInformationChangeCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MGT.AIS.Controllers.AISController.GeneratePremiumFinanceAgreement(MGT.AIS.Controllers.GeneratePremiumFinanceAgreement.GeneratePremiumFinanceAgreementCommand)">
+            <summary>
+            Used to capture insured's premium finance billing account information and return a completed premium finance agreement.
+            </summary>
+            <param name="generatePremiumFinanceAgreementCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminumArgs.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminumArgs.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminumArgs.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminumArgs.note1">
+            <summary>
+            Note to explain additional premium endorsement. Note will appear on the Notice of Amended Payment Schedule sent to the insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminumArgs.note2">
+            <summary>
+            Additional Note to explain additional premium endorsement. Note will appear on the Notice of Amended Payment Schedule sent to the insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminumArgs.policies">
+            <summary>
+            Policy Information of the premium finance loan account. This is an array and the length of array is set to 8. Can be request additional premium endorsements for a premium finance loan account. Also new policy setup for a premium finance loan account can be done if required.
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.AdditionalPreminum_result">
+            <summary>
+            Response of the Additional Premium Endorsement Request
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of additional premium endorsement request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.processingStatus">
+            <summary>
+            Status of additional premium endorsement setup (Valid values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium finance company code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.totalAccountBalanceAmount">
+            <summary>
+            Policy unpaid balance (totalAccountBalanceAmount = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.paymentTerm">
+            <summary>
+            Number of installment payments for the premium finance loan account. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.paymentAmount">
+            <summary>
+            New payment amount after the addition of the added premium endorsement. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.nextPaymentDueDate">
+            <summary>
+            Next payment due date reflecting the new payment amount (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AdditionalPreminum_resultEntity.nextPaymentDueAmount">
+            <summary>
+            Revised payment amount after the addtion of the added premium endorsement. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceArgs.insured">
+            <summary>
+            Information of the Insured(Policyholder) to generate premium finance agreement
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceArgs.agent">
+            <summary>
+            Information of the Agent who wrote the insurance policy to generate premium finance agreement
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceArgs.account">
+            <summary>
+            Billing Information of the Insured for generate premium finance agreement
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceArgs.policies">
+            <summary>
+            Policy Information of the Insured for generate premium finance agreement. This is an array and the length of the array is set to 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResult.results">
+            <summary>
+            Response of the Generate Premium Finance Agreement Request
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of new premium finance agreement request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.processingStatus">
+            <summary>
+            Status of billing account setup (Valid Values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.totalPremiumAmount">
+            <summary>
+            Total policy premium including all taxes and applicable fees. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.totalDownpayAmount">
+            <summary>
+            Total down payment including policy premium and non-refundable taxes and fees to be collected with policy premium down payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.amountFinanced">
+            <summary>
+            Amount financed (amountFinanced = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.financeCharge">
+            <summary>
+            Finance charge to be billed to the Insured for the premium finance loan. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.totalOfPayments">
+            <summary>
+            Total of Payments including finance charge (totalOfPayments = amountFinanced + financeCharge). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.numberOfInstallments">
+            <summary>
+            Number of installments (not including downpayment). Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.paymentAmount">
+            <summary>
+            Insured's installment payment amount (paymentAmount = totalOfPayments / numberOfInstallments). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.billingAccountSetupDate">
+            <summary>
+            Premium finance agreement setup business day (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.firstPaymentDueDate">
+            <summary>
+            Due date of the first installment (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.nextPaymentDueDate">
+            <summary>
+            Next payment due date (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.nextPaymentDueAmount">
+            <summary>
+            Next payment due amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.installmentBillingServiceFee">
+            <summary>
+            Installment billing service fee. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.originalAPR">
+            <summary>
+            Annual Percentage Rate from the rate chart or a special rate used. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.currentAPR">
+            <summary>
+            Recalculated Annual Percentage rate after Addon or Arranger Fee. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.stampTax">
+            <summary>
+             Florida state documentary stamp tax amount.Max length 7
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinanceResultEntity.premiumFinanceAgreement">
+            <summary>
+            Returns a URL that enables to download the Premium Finance Agreement in PDF format. Max length 100
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.AddPreminumFinance_account">
+            <summary>
+            Billing Information of the Insured for generate premium finance agreement
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.accountType">
+            <summary>
+            Insured's policy type (Valid Values: "P"=Personal / Individual, "C"=Commercial / Business). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.totalPremiumAmount">
+            <summary>
+            Total policy premium including all taxes and applicable fees (Total of policy PremiumAmount, policyFee1Amount, policyFee2Amount, policyFee3Amount, policyFee4Amount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.totalDownPayAmount">
+            <summary>
+            Total down payment including policy premium and non-refundable taxes and fees to be collected with policy premium down payment (Total of policy PremiumDownpay, policyFee1AmountDownpay, policyFee2AmountDownpay, policyFee3AmountDownpay, policyFee4AmountDownpay). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.amountFinanced">
+            <summary>
+            Amount financed (amountFinanced = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.calculateFinanceChargeFlag">
+            <summary>
+            If "calculateFinanceChargeFlag" set to "Y"=Yes, system will calculate the finance charge and APR(Whatever values passed in for calculated fields will be ignored). If "calculateFinanceChargeFlag" set to "N"/Blank=No, values for calculated fileds must be passed in (Valid Values: "Y"=Yes, or "N"/Blank=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.financeCharge">
+            <summary>
+            Finance charge to be billed to the Insured for the premium finance loan. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.totalOfPayments">
+            <summary>
+            Total of Payments including finance charge (totalOfPayments = amountFinanced + financeCharge). Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.quarterlyPaymentFlag">
+            <summary>
+            Insured's premium finance loan account payment intervals. Is billing setup as a Quarterly Payment (to be billed every 3 months) or as a Monthly Payment (Valid Values: Y=Quarterly, N=Monthly). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.paymentTerm">
+            <summary>
+            Number of installment payments for the premium finance loan account. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.paymentAmount">
+            <summary>
+            Insured's installment payment amount (paymentAmount = totalOfPayments / paymentTerm). Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.firstPaymentDate">
+            <summary>
+            Due date of the first installment (Format: MMDDYYYY). If "firstPaymentDate" not given, system will calculate it using company settings and policy inception date. If there are multiple policies earliest inception date will be used. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.originalAPR">
+            <summary>
+            Annual Percentage Rate from the rate chart or a special rate used. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.currentAPR">
+            <summary>
+            Recalculated Annual Percentage Rate after Addon or Arranger Fee. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.quoteUser">
+            <summary>
+            Quote user ID to access rate table assigned by AIS. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.brokerFeeAddonFlag">
+            <summary>
+            Arrangers fee added to the APR to be paid to the producer on the premium finance loan (A=Addon, S=Special). Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.brokerFeeAddonAmount">
+            <summary>
+            Arrangers fee to be paid to the producer on the premium finance loan or Addon Amount which is an amount allowable by premium finance statute to be added to the APR as a one-time setup charge. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 9
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.policyBrokerFees">
+            <summary>
+            N/A. Required if "calculateFinanceChargeFlag" is set to "Y"=Yes. Max length 9
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.floridaAccountFlag">
+            <summary>
+            Florida state documentary stamp tax required for Florida licensed premium finance companies and if the Insured's address is located in Florida(Valid Values: "Y"=Florida state account, or "N"/Blank=Not a Florida state account). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.stampTax">
+            <summary>
+            Florida state documentary stamp tax amount. Required if "floridaAccountFlag" is set to "Y"(Florida state account) and "calculateFinanceChargeFlag" is set to No (This is a calcualed field). Max length 7
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.quoteNumber">
+            <summary>
+            Quote number to be assigned by client. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.billingFee">
+            <summary>
+            Billing fee to be charged to the Insured on a monthly basis. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_account.billingType">
+            <summary>
+            Whether the premium finance loan is setup as a continuous pay or continuous billing account. On a continuous pay account Insured will be billed after loan paid off on a monthly basis until the renewal. If a continuous bill account insured will pay a down payment to be kept in escrow for future year's renewals("C"=Continuous Pay)
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.AddPreminumFinance_agent">
+            <summary>
+            Information of the Agent who wrote the insurance policy to generate premium finance agreement
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_agent.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. "agentCodeCrossReference" is required when the "agentCode" is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_agent.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. "agentCode" is required when the "agentCodeCrossReference" not available. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_agent.agentName">
+            <summary>
+            Name of the Agent. Max length 40
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.AddPreminumFinance_insured">
+            <summary>
+            Information of the Insured(Policyholder) to generate premium finance agreement
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredName2">
+            <summary>
+            Second business name of the Insured if commercial lines coverage. First name of the Insured if personal lines coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredAddress1">
+            <summary>
+            Street address of the Insured. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredAddress2">
+            <summary>
+            Street address of the Insured continued (if required). Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredCity">
+            <summary>
+            City of the Insured. Max length 23
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredState">
+            <summary>
+            State of the Insured (2 digit state abbreviation). Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredZip">
+            <summary>
+            Zip code of the Insured (Only use 5 digit zip code). Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredPhoneNumber">
+            <summary>
+            Phone number of the Insured including 3 digit area code. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_insured.insuredEmail">
+            <summary>
+            E-Mail address of the Insured to be used for all email notifications. Max length 50
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.AddPreminumFinance_policy">
+            <summary>
+            Policy Information of the Insured for generate premium finance agreement. This is an array and the length of the array is set to 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyNumber">
+            <summary>
+            Policy number of the policy. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyInceptionDate">
+            <summary>
+            Inception Date (Effective Date) of the policy(Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyTerm">
+            <summary>
+            The period of coverage provided by the policy in months (If 12 month policy policyTerm is 12). Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyInsuranceCompanyCrossReference">
+            <summary>
+            "policyInsuranceCompanyCrossReference" is the code used by the client to identify insurance company on their system. This need to be setup in the AIS system first. "policyInsuranceCompanyCrossReference" is required when the "policyInsuranceCompanyNumber" is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyInsuranceCompanyNumber">
+            <summary>
+            "policyInsuranceCompanyNumber" is the code used to identify insurance company which is supplied by AIS. "policyInsuranceCompanyNumber" is required when the "policyInsuranceCompanyCrossReference" is not available. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyCoverageTypeCrossReference">
+            <summary>
+            "policyCoverageTypeCrossReference" is the policy coverage type used by the client to identify the type of policy on their system. This needs to be setup in the AIS system first. "policyCoverageTypeCrossReference" is required when the "policyCoverageTypeCode is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyCoverageTypeCode">
+            <summary>
+            "policyCoverageTypeCode" is the code used to identify the policy coverage type which is supplied by AIS. "policyCoverageTypeCode" is required when the "policyCoverageTypeCrossReference" is not available. Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyPremiumAmount">
+            <summary>
+            Policy Premium Amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyPremiumDownpay">
+            <summary>
+            Policy Premium Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee1Type">
+            <summary>
+            Policy Fee 1 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee1Description">
+            <summary>
+            Policy Fee 1 Description. "policyFee1Description" is required if "policyFee1Amount" is given. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee1Amount">
+            <summary>
+            Policy Fee 1 Amount. "policyFee1Amount" is required if "policyFee1Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee1AmountDownpay">
+            <summary>
+            Policy Fee 1 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee2Type">
+            <summary>
+            Policy Fee 2 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee2Description">
+            <summary>
+            Policy Fee 2 Description. "policyFee2Description" is required if "policyFee2Amount" is given. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee2Amount">
+            <summary>
+            Policy Fee 2 Amount. "policyFee2Amount" is required if "policyFee2Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee2AmountDownpay">
+            <summary>
+            Policy Fee 2 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee3Type">
+            <summary>
+            Policy Fee 3 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee3Description">
+            <summary>
+            Policy Fee 3 Description. "policyFee3Description" is required if "policyFee3Amount" is given. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee3Amount">
+            <summary>
+            Policy Fee 3 Amount. "policyFee3Amount" is required if "policyFee3Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee3AmountDownpay">
+            <summary>
+            Policy Fee 3 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee4Type">
+            <summary>
+            Policy Fee 4 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee4Description">
+            <summary>
+            Policy Fee 4 Description. "policyFee4Description" is required if "policyFee4Amount" is given. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee4Amount">
+            <summary>
+            Policy Fee 4 Amount. "policyFee4Amount" is required if "policyFee4Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFee4AmountDownpay">
+            <summary>
+            Policy Fee 4 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFilingFlag">
+            <summary>
+            Does policy have a filing? (Extended policy cancellation period) (Valid Values: "Y"=Yes, "N"/Blank=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AddPreminumFinance_policy.policyFilingDays">
+            <summary>
+            Number of days insurance company required to give notice to additional regulatory agencies.(Extended policy cancellation period (number of days)). "policyFilingDays" is required if "policyFilingFlag" is set to "Y"
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChangeArgs.agentInfo">
+            <summary>
+            Information of the Agent who wrote the insurance policy being setup for a premium finance loan
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.AgentInformationChange_agentinfo">
+            <summary>
+            Information of the Agent who wrote the insurance policy being setup for a premium finance loan
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. "agentCodeCrossReference" is required when the "agentCode" is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. "agentCode" is required when the "agentCodeCrossReference" not available. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentRequestType">
+            <summary>
+            Agent Information to be added or changed (Valid Values: "A"=ADD or "C"=CHANGE). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentNameChangeFlag">
+            <summary>
+            Agent name change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentName">
+            <summary>
+            Agent name to be changed. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentAddressChangeFlag">
+            <summary>
+            Agent address change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentAddress">
+            <summary>
+            Agent address to be changed. Agent address is required if agentAddressChangeFlag set to "Y". Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentCity">
+            <summary>
+            Agent city to be changed. Agent city is required if agentAddressChangeFlag set to "Y". Max length 22
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentState">
+            <summary>
+            Agent state to be changed. Agent state is required if agentAddressChangeFlag set to "Y". Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentZipCode">
+            <summary>
+            Agent zip code to be changed. Agent zip code is required if agentAddressChangeFlag set to "Y". Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentPhoneChangeFlag">
+            <summary>
+            Agent phone change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentPhoneNumber">
+            <summary>
+            Agent phone number to be changed. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentFaxChangeFlag">
+            <summary>
+            Agent fax number change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentFaxNumber">
+            <summary>
+            Agent fax number to be changed. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentEmailChangeFlag">
+            <summary>
+            Agent email address change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentEmailAddress">
+            <summary>
+            Agent email address to be changed. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentMailOptionChangeFlag">
+            <summary>
+            Agent mail option change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentMailOptionFlag">
+            <summary>
+            Agent correspondence to be sent by fax, email or through USPS (Valid Values: "F"=Fax, "E"=Email, Blank=Regular Mail). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentSSNFederalIdChangeFlag">
+            <summary>
+            Agent Social Security Number / Federal Id number change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentSSNFederalIdTypeFlag">
+            <summary>
+            Agent Social Security Number / Federal ID Number (Valid Values: "S"=SSN, "F"=Federal ID). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_agentinfo.agentSSNFederalId">
+            <summary>
+            Agent Social Security Number or Federal ID Number. Max length 9
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.AgentInformationChange_result">
+            <summary>
+            Response of the Agent Information Change Request
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of agent name and address change request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.processingStatus">
+            <summary>
+            Status of Agent information change request(Valid Values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium finance company code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.AgentInformationChange_resultEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationArgs.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. "aisAccountNumber" is required to retrieve the billing account information without "insuredId" and "policyNumber". Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationArgs.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Both "insuredId" and "policyNumber" is required to retrieve the billing account information without "aisAccountNumber". Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationArgs.policyNumber">
+            <summary>
+            Policy number of the policy. Both "insuredId" and "policyNumber" is required to retrieve the billing account information without "aisAccountNumber". Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationArgs.policyFlag">
+            <summary>
+            Retrieve the account information including all the policy information? (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of billing account information request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.processingStatus">
+            <summary>
+            Status of billing account information request (Valid Values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium finance company code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredName2">
+            <summary>
+            Second business name of the Insured if commercial lines coverage. First name of the Insured if personal lines coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredAddress1">
+            <summary>
+            Street address of the insured. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredAddress2">
+            <summary>
+            Street address of the Insured continued (if required). Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredCity">
+            <summary>
+            City of the Insured. Max length 23
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredState">
+            <summary>
+            State of the Insured (2 digit state abbreviation). Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.insuredZip">
+            <summary>
+            Zip code of the Insured (5 digit). Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.totalPremiumAmount">
+            <summary>
+            Total policy premium including all taxes and applicable fees. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.totalDownpayAmount">
+            <summary>
+            Total down payment including policy premium and non-refundable taxes and fees to be collected with policy premium down payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.totalAccountBalanceAmount">
+            <summary>
+            Policy unpaid balance (totalAccountBalanceAmount = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.paymentTerm">
+            <summary>
+            Number of installment payments for the premium finance loan account. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.paymentAmount">
+            <summary>
+            Installment amount due (paymentAmount = totalAccountBalanceAmount / paymentTerm). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.billingAccountSetupDate">
+            <summary>
+            Billing account setup business day(Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.nextPaymentDueDate">
+            <summary>
+            Next payment due date (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.nextPaymentDueAmount">
+            <summary>
+            Next payment due amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.installmentBillingServiceFee">
+            <summary>
+            Installment billing service fee. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountInformationEntity.billingAccountPolicy">
+            <summary>
+            Policy Information of the Insured to be setup with a billing account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policySequenceNumber">
+            <summary>
+            Assigned by AIS. Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyNumber">
+            <summary>
+            Policy number of the policy. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyInceptionDate">
+            <summary>
+            Inception Date (Effective Date) of the policy(Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyTerm">
+            <summary>
+            The period of coverage provided by the policy in months (If 12 month policy policyTerm is 12). Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyInsuranceCompanyNumber">
+            <summary>
+            "policyInsuranceCompanyNumber" is the code used to identify insurance company which is supplied by AIS. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyInsuranceCompanyName">
+            <summary>
+            Name of the Insurance company on the policy. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyCoverageTypeCode">
+            <summary>
+            "policyCoverageTypeCode" is the code used to identify the policy coverage type which is supplied by AIS. Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyCoverageDescription">
+            <summary>
+            Policy coverage description. Max length 18
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyPremiumDescription">
+            <summary>
+            Description of the policy. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyPremiumAmount">
+            <summary>
+            Policy Premium Amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyPremiumDownpay">
+            <summary>
+            Policy Premium Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyUnpaidPremiumAmount">
+            <summary>
+            Policy Unpaid Premium Amount = Policy Premium Amount - Policy Premium Down payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee1Type">
+            <summary>
+            Policy Fee 1 Type (Valid Values: "T"=Taxes, "F"=Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee1Description">
+            <summary>
+            Policy Fee 1 Description. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee1Amount">
+            <summary>
+            Policy Fee 1 Amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee1AmountDownpay">
+            <summary>
+            Policy Fee 1 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee1UnpaidAmount">
+            <summary>
+            Policy Fee 1 Unpaid Amount = Total Policy Fee - Total Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee2Type">
+            <summary>
+            Policy Fee 2 Type (Valid Values: "T"=Taxes, "F"=Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee2Description">
+            <summary>
+            Policy Fee 2 Description. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee2Amount">
+            <summary>
+            Policy Fee 2 Amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee2AmountDownpay">
+            <summary>
+            Policy Fee 2 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee2UnpaidAmount">
+            <summary>
+            Policy Fee 2 Unpaid Amount = Total Policy Fee - Total Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee3Type">
+            <summary>
+            Policy Fee 3 Type (Valid Values: "T"=Taxes, "F"=Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee3Description">
+            <summary>
+            Policy Fee 3 Description. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee3Amount">
+            <summary>
+            Policy Fee 3 Amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee3AmountDownpay">
+            <summary>
+            Policy Fee 3 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee3UnpaidAmount">
+            <summary>
+            Policy Fee 3 Unpaid Amount = Total Policy Fee - Total Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee4Type">
+            <summary>
+            Policy Fee 4 Type (Valid Values: "T"=Taxes, "F"=Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee4Description">
+            <summary>
+            Policy Fee 4 Description. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee4Amount">
+            <summary>
+            Policy Fee 4 Amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee4AmountDownpay">
+            <summary>
+            Policy Fee 4 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.BillingAccountPolicy.policyFee4UnpaidAmount">
+            <summary>
+            Policy Fee 4 Unpaid Amount = Total Policy Fee - Total Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.IdentityModel">
+            <summary>
+            AIS Identity return Value
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChangeArg.insuredInfo">
+            <summary>
+            Information of the Insured(Policyholder) currently setup with a billing account to update name or address
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo">
+            <summary>
+            Information of the Insured(Policyholder) currently setup with a billing account to update name or address
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredNameChangeFlag">
+            <summary>
+            Insured name change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredName2">
+            <summary>
+            Second business name of the Insured if commercial lines coverage. First name of the Insured if personal lines coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredAddressChangeFlag">
+            <summary>
+            Insured address change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredAddress1">
+            <summary>
+            Street address of the Insured. Insured address is required if insuredAddressChangeFlag set to "Y". Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredAddress2">
+            <summary>
+            Street address of the Insured continued (if required). Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredCity">
+            <summary>
+            City of the Insured. Insured city is required if insuredAddressChangeFlag set to "Y". Max length 23
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredState">
+            <summary>
+            State of the Insured (2 digit state abbreviation). Insured state is required if insuredAddressChangeFlag set to "Y". Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredZip">
+            <summary>
+            Zip code of the Insured (Only use 5 digit zip code). Insured zip code is required if insuredAddressChangeFlag set to "Y". Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredPhoneChangeFlag">
+            <summary>
+            Insured phone change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredPhoneNumber">
+            <summary>
+            Phone number of the Insured including 3 digit area code. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredFaxChangeFlag">
+            <summary>
+            Insured fax change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredFaxNumber">
+            <summary>
+            Fax Number of the Insured including 3 digit area code.Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredEmailChangeFlag">
+            <summary>
+            Insured email change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredEmail">
+            <summary>
+            E-Mail Address of the Insured to be used for all email notifications. Max length 50
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredCellPhoneChangeFlag">
+            <summary>
+            Insured mobile phone change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredCellPhoneServiceProviderCode" -->
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredCellPhoneNumber">
+            <summary>
+            Mobile phone number of the Insured including 3 digit area code. Required if "insuredCellPhoneServiceProviderCode" is given. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredBillMailOptionChangeFlag">
+            <summary>
+            Insured bill mail option change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredBillMailOption">
+            <summary>
+            Billing statement delivery method to the Insured (Valid Values: "E"=Email (E-Bill sent to the Insured as a PDF document) or leave blank for regular mail(Bill will be sent to the insured by USPS)). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredBillReminderOptionChangeFlag">
+            <summary>
+            Insured bill reminder option change flag (Valid Values: "Y"=Yes or "N"=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationChange_insuredInfo.insuredBillReminderOption">
+            <summary>
+            Method of sending reminders to the Insured, whenever a billing statement is ready(Valid Values: "E"=Email, "S"=SMS). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of Insured name and address change request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.processingStatus">
+            <summary>
+            Status of Insured information change request(Valid Values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium finance company code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.aisAccountNumber">
+            <summary>
+            Billing Account Number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.InsuredInformationCHnage_resultEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBillingArgs.insured">
+            <summary>
+            Information of the Insured(Policyholder) to be setup with a premium finance loan account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBillingArgs.agent">
+            <summary>
+            Information of the Agent who wrote the insurance policy being setup for a premium finance loan account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBillingArgs.account">
+            <summary>
+            Billing information of the Insured to be setup with a premium finance loan account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBillingArgs.policies">
+            <summary>
+            Policy Information of the premium finance loan account. This is an array and the length of the array is set to 8
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.NewBilling_account">
+            <summary>
+            Billing information of the Insured to be setup with a premium finance loan account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.accountType">
+            <summary>
+            Insured's policy type (Valid Values: "P"=Personal/Individual, "C"=Commercial/ Business). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.totalPremiumAmount">
+            <summary>
+            Total policy premium including all taxes and applicable fees (Total of policy premiumAmount, policyFee1Amount, policyFee2Amount, policyFee3Amount, policyFee4Amount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.totalDownPayAmount">
+            <summary>
+            Total down payment including policy premium and non-refundable taxes and fees to be collected with policy premium down payment (Total of policy PremiumDownpay, policyFee1AmountDownpay, policyFee2AmountDownpay, policyFee3AmountDownpay, policyFee4AmountDownpay). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.amountFinanced">
+            <summary>
+            Amount financed (amountFinanced = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.calculateFinanceChargeFlag">
+            <summary>
+            If "calculateFinanceChargeFlag" set to "Y"=Yes, system will calculate the finance charge and APR (Whatever values passed in for calculated fields will be ignored). If "calculateFinanceChargeFlag" set to "N"/Blank=No, values for calculated fileds must be passed in (Valid Values: "Y"=Yes, or "N"/Blank=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.financeCharge">
+            <summary>
+            Finance charge to be billed to the Insured for the premium finance loan. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.totalOfPayments">
+            <summary>
+            Total of Payments including finance charge (totalOfPayments = amountFinanced + financeCharge). Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.quarterlyPaymentFlag">
+            <summary>
+            Insured's premium finance loan account payment intervals. Is billing setup as a Quarterly Payment (to be billed every 3 months) or as a Monthly Payment (Valid Values: Y=Quarterly, N=Monthly). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.paymentTerm">
+            <summary>
+            Number of installment payments for the premium finance loan account. Max length 3   
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.paymentAmount">
+            <summary>
+            Insured's installment payment amount (paymentAmount = totalOfPayments / paymentTerm). Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.firstPaymentDate">
+            <summary>
+            Due date of the first installment (Format: MMDDYYYY). If "firstPaymentDate" not given, system will calculate it using company settings and policy inception date. If there are multiple policies earliest inception date will be used. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.originalAPR">
+            <summary>
+            Annual Percentage Rate from the rate chart or a special rate used. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.currentAPR">
+            <summary>
+            Recalculated Annual Percentage Rate after Addon or Arranger Fee. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.brokerFeeAddonFlag">
+            <summary>
+            Arrangers fee added to the APR to be paid to the producer on the premium finance loan (A=Addon, S=Special). Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.brokerFeeAddonAmount">
+            <summary>
+            Arrangers fee to be paid to the producer on the premium finance loan or Addon Amount which is an amount allowable by premium finance statute to be added to the APR as a one-time setup charge. Required if "calculateFinanceChargeFlag" is set to No (This is a calculated field). Max length 9
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.policyBrokerFees">
+            <summary>
+            N/A. Max length 9
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.paymentReceived">
+            <summary>
+            If premium finance loan was setup late and producer collects the first payment from the insured, enter payment amount collected. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.spanishFlag">
+            <summary>
+            Required only if Notice of Acceptance to be generated in Spanish with English on back. Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.floridaAccountFlag">
+            <summary>
+            Florida state documentary stamp tax required for Florida licensed premium finance companies and if the Insured's address is located in Florida(Valid Values: "Y"=Florida state account, or "N"/Blank=Not a Florida state account). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.stampTax">
+            <summary>
+            Florida state documentary stamp tax amount. Required if "floridaAccountFlag" is set to "Y"(Florida state account) and "calculateFinanceChargeFlag" is set to No (This is a calcualed field). Max length 7
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.quoteNumber">
+            <summary>
+            Quote number to be assigned by client. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.signatureReceived">
+            <summary>
+            N/A (Y=Yes). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.billingFee">
+            <summary>
+            Billing Fee to be charged to the Insured on a monthly basis. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_account.billingType">
+            <summary>
+            Whether the premium finance loan is setup as a continuous pay or continuous billing account. On a continuous pay account Insured will be billed after loan paid off on a monthly basis until the renewal. If a continuous bill account insured will pay a down payment to be kept in escrow for future year's renewals("C"=Continuous Pay). Max length 1
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.NewBilling_agent">
+            <summary>
+            Information of the Agent who wrote the insurance policy being setup for a premium finance loan account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_agent.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_agent.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. "agentCode" is required when the "agentCodeCrossReference" not available. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_agent.agentName">
+            <summary>
+            Name of the Agent. System will validate the Agent Name. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_agent.generalAgentName">
+            <summary>
+            Name of the General Agent. Max length 30
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.NewBilling_insured">
+            <summary>
+            Information of the Insured(Policyholder) to be setup with a premium finance loan account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredCANumber">
+            <summary>
+            CA Number(Carrier Identification Number) assigned by the California Department of Motor Vehicles for auto/trucker policies. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredMCNumber">
+            <summary>
+            MC Number(Motor Carrier Number)assigned by the California Department of Motor Vehicles for auto/trucker policies. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.aisAccountNumber">
+            <summary>
+            Billing account number to be assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredName2">
+            <summary>
+            Second business name of the Insured if commercial lines coverage. First name of the Insured if personal lines coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredAddress1">
+            <summary>
+            Street address of the Insured. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredAddress2">
+            <summary>
+            Street address of the Insured continued (if required). Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredCity">
+            <summary>
+            City of the Insured. Max length 23
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredState">
+            <summary>
+            State of the Insured (2 digit state abbreviation). Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredZip">
+            <summary>
+            Zip code of the Insured (Only use 5 digit zip code). Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredPhoneNumber">
+            <summary>
+            Phone number of the Insured including 3 digit area code. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredFaxNumber">
+            <summary>
+            Fax number of the Insured including 3 digit area code. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredEmail">
+            <summary>
+            E-Mail Address of the Insured to be used for all email notifications. Max length 50
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MGT.AIS.AISHelper.NewBilling_insured.insuredCellPhoneServiceProviderCode" -->
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredCellPhoneNumber">
+            <summary>
+            Mobile phone number of the Insured including 3 digit area code. Required if "insuredCellPhoneServiceProviderCode" is given. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredBillMailOption">
+            <summary>
+            Billing statement delivery method to the Insured (Valid Values: "E"=Email (E-Bill sent to the Insured as a PDF document) or "M"/Blank for regular mail(Bill will be sent to the insured by USPS)). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredBillReminderOption">
+            <summary>
+            Method of sending reminders to the Insured whenever a billing statement is ready(Valid Values: "E"=Email, "S"=SMS, "Y"=Both, "N"=None, Blank=SMS/Email). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.bankAccountType">
+            <summary>
+            Bank account type of the Insured which will use to make their payment (Valid Values: "C"=Checking "S"=Savings). Required if "bankABANumber" and "bankAccountNumber" are given. Bank Account information will be used to setup AutoPay. Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.bankABANumber">
+            <summary>
+            ABA/Routing number of the bank account which Insured will use to make their payment. System will validate the routing number.(Valid Values: 9 digits number used to identify specific financial institutions within the United States). Required if "bankAccountType" is given. Bank Account information will be used to setup AutoPay. Max length 9
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.bankAccountNumber">
+            <summary>
+            Bank Account number which Insured will use to make their payment. Required if "bankAccountType" is given. Bank Account information will be used to setup AutoPay. Max length 17
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_insured.insuredSSNFederalId">
+            <summary>
+            If business account enter the Insured's Federal ID Number. If personal account enter the Insured's Social Security Number. Max length 9
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.NewBilling_policies">
+            <summary>
+            Policy Information of the premium finance loan account.This is an array and the length of the array is set to 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyNumber">
+            <summary>
+            Policy number of the policy. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyInceptionDate">
+            <summary>
+            Inception Date (Effective Date) of the policy(Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyTerm">
+            <summary>
+            The period of coverage provided by the policy in months.(If 12 month policy policyTerm is 12). Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyInsuranceCompanyCrossReference">
+            <summary>
+            "policyInsuranceCompanyCrossReference" is the code used by the client to identify insurance company on their system. This need to be setup in the AIS system first. "policyInsuranceCompanyCrossReference" is required when the "policyInsuranceCompanyNumber" is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyInsuranceCompanyNumber">
+            <summary>
+            "policyInsuranceCompanyNumber" is the code used to identify insurance company which is supplied by AIS. "policyInsuranceCompanyNumber" is required when the "policyInsuranceCompanyCrossReference" is not available. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyInsuranceCompanyName">
+            <summary>
+            Insurance Company name for the billed policy. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyInsuranceCompanyCO">
+            <summary>
+            General Agent name for the billed policy. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyCoverageTypeCrossReference">
+            <summary>
+            "policyCoverageTypeCrossReference" is the policy coverage type used by the client to identify the type of policy on their system. This needs to be setup in the AIS system first. "policyCoverageTypeCrossReference" is required when the "policyCoverageTypeCode is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyCoverageTypeCode">
+            <summary>
+            "policyCoverageTypeCode" is the code used to identify the policy coverage type which is supplied by AIS. "policyCoverageTypeCode" is required when the "policyCoverageTypeCrossReference" is not available. Max length 2
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyPremiumAmount">
+            <summary>
+            Policy Premium Amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyPremiumDownpay">
+            <summary>
+            Policy Premium Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyUnpaidPremiumAmount">
+            <summary>
+            Total unpaid policy premium balance to be collected (totalUnpaidPremiumAmount = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyCommissionAmount">
+            <summary>
+            Policy commission amount to be paid to agent for binding policy. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyCommissionPercentage">
+            <summary>
+            Policy commission percentage to be paid to agent by the insurance company. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyCommissionRetainFlag">
+            <summary>
+            Policy commission retained by agent netted from the down payment collected by the Insured (Valid Values: "Y"=Retained). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee1Type">
+            <summary>
+            Policy Fee 1 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee1Description">
+            <summary>
+            Policy Fee 1 Description. "policyFee1Description" is required if "policyFee1Amount" is given. Max length 30 
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee1Amount">
+            <summary>
+            Policy Fee 1 Amount. "policyFee1Amount" is required if "policyFee1Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee1AmountDownpay">
+            <summary>
+            Policy Fee 1 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee1UnpaidAmount">
+            <summary>
+            Policy Fee 1 Unpaid Amount (policyFee1UnpaidAmount = policyFee1Amount - policyFee1AmountDownpay). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee2Type">
+            <summary>
+            Policy Fee 2 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee2Description">
+            <summary>
+            Policy Fee 2 Description. "policyFee2Description" is required if "policyFee2Amount" is given. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee2Amount">
+            <summary>
+            Policy Fee 2 Amount. "policyFee2Amount" is required if "policyFee2Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee2AmountDownpay">
+            <summary>
+            Policy Fee 2 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee2UnpaidAmount">
+            <summary>
+            Policy Fee 2 Unpaid Amount (policyFee2UnpaidAmount = policyFee2Amount - policyFee2AmountDownpay). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee3Type">
+            <summary>
+            Policy Fee 3 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee3Description">
+            <summary>
+            Policy Fee 3 Description. "policyFee3Description" is required if "policyFee3Amount" is given. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee3Amount">
+            <summary>
+            Policy Fee 3 Amount. "policyFee3Amount" is required if "policyFee3Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee3AmountDownpay">
+            <summary>
+            Policy Fee 3 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee3UnpaidAmount">
+            <summary>
+            Policy Fee 3 Unpaid Amount (policyFee3UnpaidAmount = policyFee3Amount - policyFee3AmountDownpay). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee4Type">
+            <summary>
+            Policy Fee 4 Type (Valid Values: "T"=Taxes, "F"=Fees, "A" or Blank=Taxes or Fees). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee4Description">
+            <summary>
+            Policy Fee 4 Description. "policyFee4Description" is required if "policyFee4Amount" is given. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee4Amount">
+            <summary>
+            Policy Fee 4 Amount. "policyFee4Amount" is required if "policyFee4Description" is given. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee4AmountDownpay">
+            <summary>
+            Policy Fee 4 Down Payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFee4UnpaidAmount">
+            <summary>
+            Policy Fee 4 Unpaid Amount (policyFee4UnpaidAmount = policyFee4Amount - policyFee4AmountDownpay). Max length 11 
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFilingFlag">
+            <summary>
+            Does policy have a filing? (Extended policy cancellation period) (Valid Values: "Y"=Yes, "N"/Blank=No). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_policies.policyFilingDays">
+            <summary>
+            Number of days insurance company required to give notice to additional regulatory agencies.(Extended policy cancellation period (number of days)). "policyFilingDays" is required if "policyFilingFlag" is set to "Y". Max length 2
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.NewBilling_response">
+            <summary>
+            Response of the New Billing Account Setup Request
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of new billing account setup request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.processingStatus">
+            <summary>
+            Status of billing account setup (Valid Values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20  
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium finance company code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.aisAccountNumber">
+            <summary>
+            Billing account number to be assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12   
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.totalPremiumAmount">
+            <summary>
+            Total policy premium including all taxes and applicable fees. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.totalDownPayAmount">
+            <summary>
+            Total down payment including policy premium and non-refundable taxes and fees to be collected with policy premium down payment. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.amountFinanced">
+            <summary>
+            Amount financed (amountFinanced = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.financeCharge">
+            <summary>
+            Finance charge to be billed to the Insured for the premium finance loan. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.totalOfPayments">
+            <summary>
+            Total of payments including finance charge (totalOfPayments = amountFinanced + financeCharge). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.numberOfInstallments">
+            <summary>
+            Number of installments (not including down payment). Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.paymentAmount">
+            <summary>
+            Insured's installment payment amount (paymentAmount = totalOfPayments / numberOfInstallments). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.billingAccountSetupDate">
+            <summary>
+            Billing account setup business day(Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.firstPaymentDueDate">
+            <summary>
+            Due date of the first installment (Format: MM/DD/YYYY). If "firstPaymentDate" not given, system will calculate it by adding 30 days to the policy inception date. If there are multiple policies earliest inception date will be used. Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.nextPaymentDueDate">
+            <summary>
+            Next payment due date (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.nextPaymentDueAmount">
+            <summary>
+            Next payment due amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.installmentBillingServiceFee">
+            <summary>
+            Installment billing service fee
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.originalAPR">
+            <summary>
+            Annual Percentage Rate from the rate chart or a special rate used. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.currentAPR">
+            <summary>
+            Recalculated Annual Percentage Rate after Addon or Arranger Fee. Max length 5
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.stampTax">
+            <summary>
+            Florida state documentary stamp tax amount. Max length 7
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.processingReportLocation">
+            <summary>
+            Returns a URL that enables to download the Contract Processing Report in PDF format. Max length 100 
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.premiumFinanceAgreement">
+            <summary>
+            Returns a URL that enables to download the Premium Finance Agreement in PDF format. Max length 100
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.cdAgreement">
+            <summary>
+            Returns a URL that enables to download the Collateral Deposit Agreement in PDF Format(If Applicable). Max length 100
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.NewBilling_responseEntity.producerQuote">
+            <summary>
+            Producer quote to show the down payment due to the insurance company or General Agent. Max length 100
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.note1">
+            <summary>
+            Note to explain reason for cancellation. Note will appear on the Notice of Amended Payment Schedule sent to the insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.note2">
+            <summary>
+            Additional Note to explain reason for cancellation. Note will appear on the Notice of Amended Payment Schedule sent to the insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. "agentCodeCrossReference" is required when the "agentCode" is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. "agentCode" is required when the "agentCodeCrossReference" not available. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.cancellationDate">
+            <summary>
+            Effective date of cancellation of the policy (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.cancellationType">
+            <summary>
+            Are all policies to be cancelled? If yes Valid Value: "A"=Account. If an individual policy to be cancelled and there are multiple policies on a billing account then Value: "P"=Policy. (To do this there should be at least one active policy remaining in the billing account after policy cancellation). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.requestedBy">
+            <summary>
+            Who requested cancellation of the policy (Valid Values: "A"=Agent, "I"=Insurance Company, "B"=Borrower/Insured). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellationArgs.policies">
+            <summary>
+            Policy Information of the premium finance loan account. This is an array and the length of the array is set to 8. Active policies can only be cancelled.
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.PolicyCancellation_result">
+            <summary>
+            Response of the Policy Cancellation Request
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of cancellation request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.processingStatus">
+            <summary>
+            Billing account cancellation status (Valid values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium Finance Company Code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.aisAccountNumber">
+            <summary>
+            Billing Account Number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.totalAccountBalanceAmount">
+            <summary>
+            Policy unpaid balance (totalAccountBalanceAmount = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.paymentTerm">
+            <summary>
+            Number of installment payments for the premium finance loan account. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.paymentAmount">
+            <summary>
+            Installment amount due (paymentAmount = totalAccountBalanceAmount / paymentTerm). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.nextPaymentDueDate">
+            <summary>
+            Next payment due date (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyCancellation_resultEntity.nextPaymentDueAmount">
+            <summary>
+            Next payment amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.note1">
+            <summary>
+            Note to explain reinstatment request. Note will appear on the Notice of Amended Payment Schedule sent to the Insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.note2">
+            <summary>
+            Additional Note to explain reinstatment request. Note will appear on the Notice of Amended Payment Schedule sent to the Insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. "agentCodeCrossReference" is required when the "agentCode" is not available. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. "agentCode" is required when the "agentCodeCrossReference" not available. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.reinstateDate">
+            <summary>
+            Effective date of reinstatement of the insurance policy(Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.reinstateType">
+            <summary>
+            Are all insurance policies reinstated? If yes Valid Value: "A"=Account. If an individual policy is reinstated and there are multiple policies on a billing account, Valid Value: "P"=Policy. Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.requestedBy">
+            <summary>
+            Who requested the reinstatement of the insurance policy (Valid Values: "A"=Agent, "I"=Insurance Company). Max length 1
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatementArgs.policies">
+            <summary>
+            Policy Information of the premium finance loan account. This is an array and the length of the array is set to 8. Can be reinstate cancelled policies in a premium finance loan account
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.PolicyReinStatement_policy">
+            <summary>
+            Policy Information of the premium finance loan account. This is an array and the length of the array is set to 8. Can be reinstate cancelled policies in a premium finance loan account
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_policy.policyNumber">
+            <summary>
+            Policy number of the policy where policy reinstatement request to be applied. Max length 30
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.PolicyReinStatement_result">
+            <summary>
+            Response of the Policy Reinstatement Request
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the response of reinstatement request. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.processingStatus">
+            <summary>
+            Status of billing account setup (Valid values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium finance company code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.totalAccountBalanceAmount">
+            <summary>
+            Policy unpaid balance (totalAccountBalanceAmount = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.paymentTerm">
+            <summary>
+            Number of installment payments for the premium finance loan account. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.paymentAmount">
+            <summary>
+            Installment amount due (paymentAmount =totalAccountBalanceAmount / paymentTerm). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.nextPaymentDueDate">
+            <summary>
+            Next payment due date (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.PolicyReinStatement_resultEntity.nextPaymentDueAmount">
+            <summary>
+            Next payment amount. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsementArgs.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsementArgs.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsementArgs.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsementArgs.note1">
+            <summary>
+            Note to explain return premium endorsement. Note will appear on the Notice of Amended Payment Schedule sent to the insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsementArgs.note2">
+            <summary>
+            Additional Note to explain return premium endorsement. Note will appear on the Notice of Amended Payment Schedule sent to the insured and agent and in the note file on the customer inquiry. Max length 75
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsementArgs.policies">
+            <summary>
+            Policy Information of the premium finance loan account. This is an array and the length of the array is set to 8. Can be request multiple return premium endorsement for a premium finance loan account
+            </summary>
+        </member>
+        <member name="T:MGT.AIS.AISHelper.ReturnPreminumEndorsement_result">
+            <summary>
+            Response of the Return Premium Endorsement Request
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.responseReference">
+            <summary>
+            System generated unique identifier to identify the return premium endorsement response. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.processingStatus">
+            <summary>
+            Status of return premium endorsement (Valid Values: Accepted or Rejected). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.returnCode">
+            <summary>
+            System Generated. Max length 4
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.returnMessage">
+            <summary>
+            System Generated. Max length 255
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.processedDateTime">
+            <summary>
+            Transaction Processed Date and Time. System Generated (Format: MM/DD/YYYY HH:MM:SS). Max length 20
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.processedDate">
+            <summary>
+            Transaction Processed Date. System Generated (Format: MMDDYYYY). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.processedTime">
+            <summary>
+            Transaction Processed Time. System Generated (Format: HHMMSSNN). Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.premiumFinanceCompanyCode">
+            <summary>
+            Premium finance company code assigned by AIS. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.aisAccountNumber">
+            <summary>
+            Billing account number assigned by AIS. Max length 8
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.agentCodeCrossReference">
+            <summary>
+            "agentCodeCrossReference" is the code used by the client to identify the agent on their system. This needs to be setup in the AIS system first. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.agentCode">
+            <summary>
+            "agentCode" is the code used to identify the agent and it is supplied by AIS. Max length 6
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.insuredId">
+            <summary>
+            ID assigned to Insured using client's identifier from their system. Max length 12
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.insuredName1">
+            <summary>
+            Business name of the Insured if commercial lines insurance coverage. Last name of the Insured if personal lines insurance coverage. Max length 30
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.totalAccountBalanceAmount">
+            <summary>
+            Policy unpaid balance (totalAccountBalanceAmount = totalPremiumAmount - totalDownpayAmount). Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.paymentTerm">
+            <summary>
+            Number of installment payments for the premium finance loan account. Max length 3
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.paymentAmount">
+            <summary>
+            New payment amount after the addition of the return premium endorsement. Max length 11
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.nextPaymentDueDate">
+            <summary>
+            Next payment due date reflecting the new payment amount (Format: MM/DD/YYYY). Max length 10
+            </summary>
+        </member>
+        <member name="P:MGT.AIS.AISHelper.ReturnPreminumEndorsement_resultEntity.nextPaymentDueAmount">
+            <summary>
+            Revised payment amount after the addition of the return premium endorsement. Max length 11
+            </summary>
+        </member>
+    </members>
+</doc>
