@@ -24,7 +24,7 @@
     "@ctrl/ngx-rightclick": "^3.0.1",
     "@swimlane/ngx-datatable": "^16.0.3",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-ui": "^1.12.1",
     "moment": "^2.24.0",
     "ngx-bootstrap": "^4.3.0",
